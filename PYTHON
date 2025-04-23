@@ -1,0 +1,106 @@
+import os
+
+# Define the updated index.js content
+updated_index = '''import Head from 'next/head';
+import Map from '../components/Map';
+
+export default function Home() {
+  return (
+    <>
+      <Head>
+        <title>チェ・ミョンジョ | Portfolio</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+
+      <header className="bg-white shadow-md">
+        <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
+          <h1 className="text-2xl font-bold">Myon-tan Portfolio</h1>
+          <ul className="flex space-x-4">
+            <li><a href="#vision" className="hover:underline">Vision</a></li>
+            <li><a href="#profile" className="hover:underline">Profile</a></li>
+            <li><a href="#gakuchika" className="hover:underline">ガクチカ</a></li>
+            <li><a href="#axis" className="hover:underline">就活の軸</a></li>
+            <li><a href="#yokoku" className="hover:underline">チェのヨコク</a></li>
+            <li><a href="#map" className="hover:underline">Map</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main className="container mx-auto px-6 py-10 space-y-20">
+        {/* Vision */}
+        <section id="vision">
+          <h2 className="text-3xl font-semibold mb-4">チェのヨコク (Vision)</h2>
+          <p className="text-lg leading-relaxed">
+            協力者が次々と生まれる環境を届け<br/>
+            あらゆる夢の実現を支援<br/>
+            TEAMの力を生かし、全員が優勝できる社会を実現します。
+          </p>
+        </section>
+
+        {/* Profile */}
+        <section id="profile">
+          <h2 className="text-3xl font-semibold mb-4">Profile</h2>
+          <ul className="list-disc pl-5 space-y-2">
+            <li>立命館大学 経営学部 経営学科</li>
+            <li>大阪府国際交流財団での活動</li>
+            <li>学部自治会＆International Buddy</li>
+            <li>国際文化交流会の企画運営</li>
+            <li>写真サークル立ち上げ、展示会開催</li>
+          </ul>
+        </section>
+
+        {/* ガクチカ */}
+        <section id="gakuchika">
+          <h2 className="text-3xl font-semibold mb-4">ガクチカ</h2>
+          <ul className="list-decimal pl-5 space-y-2">
+            <li>「留学生語学補助教員」制度を学部に導入し、2025年度から実現</li>
+            <li>学内雑誌（発行部数1万8千部）の誌面・表紙デザインを3年間担当</li>
+          </ul>
+        </section>
+
+        {/* 就活の軸 */}
+        <section id="axis">
+          <h2 className="text-3xl font-semibold mb-4">就活の軸</h2>
+          <ul className="list-disc pl-5 space-y-2">
+            <li><strong>環境の軸:</strong> 合理性の中にも「余白」を残し、非合理的な考えや遊び心を大事にする</li>
+            <li><strong>業務内容の軸:</strong> 努力する人の成長を支え、「全員優勝社会」の実現を目指す</li>
+            <li><strong>活動領域:</strong> 空間の力を活用し、人と人を繋ぐプラットフォーム構築</li>
+          </ul>
+        </section>
+
+        {/* チェのヨコク */}
+        <section id="yokoku">
+          <h2 className="text-3xl font-semibold mb-4">チェのヨコク</h2>
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-2xl font-medium mb-2">01</h3>
+              <p>熱意を持ちながらも周りとの繋がりを得られず、孤立し夢を諦めそうになる人に、活躍の機会を提供したい！</p>
+            </div>
+            <div>
+              <h3 className="text-2xl font-medium mb-2">02</h3>
+              <p>可能性は孤独の中で萎縮し、繋がりの中で解放される。仲間が生まれる環境をつくり、誰もが可能性を花開かせられる社会を目指す。</p>
+            </div>
+            <div>
+              <h3 className="text-2xl font-medium mb-2">Mission</h3>
+              <p>毎瞬間、最善を尽くし、全員優勝。</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Adventure Map */}
+        <section id="map">
+          <h2 className="text-3xl font-semibold mb-4">Adventure Map</h2>
+          <Map />
+        </section>
+      </main>
+    </>
+  );
+}
+'''
+
+# Overwrite the pages/index.js file
+file_path = '/mnt/data/myonjo-portfolio/pages/index.js'
+with open(file_path, 'w') as f:
+    f.write(updated_index)
+
+print("pages/index.js has been updated with full content sections. Please run dev to verify!")
