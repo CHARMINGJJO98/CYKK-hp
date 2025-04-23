@@ -1,0 +1,138 @@
+import os
+
+# Define project root and file structure
+project_root = '/mnt/data/myonjo-portfolio'
+file_structure = {
+    'package.json': '''{
+  "name": "myonjo-portfolio",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && next export",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "framer-motion": "latest"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.0.0",
+    "postcss": "^8.0.0",
+    "autoprefixer": "^10.0.0"
+  }
+}''',
+    'tailwind.config.js': '''/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './pages/**/*.{js,jsx}',
+    './components/**/*.{js,jsx}'
+  ],
+  theme: {
+    extend: {}
+  },
+  plugins: []
+};''',
+    'postcss.config.js': '''module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {}
+  }
+};''',
+    'styles/globals.css': '''@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles here */''',
+    'pages/_app.js': '''import '../styles/globals.css';
+
+function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />;
+}
+
+export default MyApp;''',
+    'pages/index.js': '''import Head from 'next/head';
+import Map from '../components/Map';
+
+export default function Home() {
+  return (
+    <>
+      <Head>
+        <title>チェ・ミョンジョ | Portfolio</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <header className="bg-white shadow-md">
+        <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
+          <h1 className="text-2xl font-bold">Myon-tan Portfolio</h1>
+          <ul className="flex space-x-4">
+            <li><a href="#vision" className="hover:underline">Vision</a></li>
+            <li><a href="#profile" className="hover:underline">Profile</a></li>
+            <li><a href="#map" className="hover:underline">Map</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main className="container mx-auto px-6 py-10">
+        <section id="vision" className="mb-16">
+          <h2 className="text-3xl font-semibold mb-4">チェのヨコク (Vision)</h2>
+          <p className="text-lg leading-relaxed">
+            誰一人として疎外されることなく、全員が他者と、そして広い社会とつながり、
+            自分の存在を証明できる社会を実現したい。
+          </p>
+        </section>
+        <section id="profile" className="mb-16">
+          <h2 className="text-3xl font-semibold mb-4">Profile</h2>
+          <ul className="list-disc pl-5 space-y-2">
+            <li>立命館大学 経営学部 経営学科</li>
+            <li>大阪府国際交流財団での活動</li>
+            <li>学部自治会＆International Buddy</li>
+            <li>写真サークル立ち上げ、展示会開催</li>
+          </ul>
+        </section>
+        <section id="map">
+          <h2 className="text-3xl font-semibold mb-4">Adventure Map</h2>
+          <Map />
+        </section>
+      </main>
+    </>
+  );
+}''',
+    'components/Map.js': '''import { motion } from 'framer-motion';
+
+export default function Map() {
+  return (
+    <motion.div
+      className="w-full h-[500px] bg-gray-100 rounded-lg shadow-lg overflow-hidden"
+      drag
+      dragConstraints={{ left: -200, right: 200, top: -200, bottom: 200 }}
+      whileTap={{ cursor: 'grabbing' }}
+    >
+      <div className="w-full h-full flex items-center justify-center text-gray-500">
+        Adventure Map Placeholder
+      </div>
+    </motion.div>
+  );
+}'''
+}
+
+# Create directories and write files
+for relative_path, content in file_structure.items():
+    full_path = os.path.join(project_root, relative_path)
+    os.makedirs(os.path.dirname(full_path), exist_ok=True)
+    with open(full_path, 'w') as f:
+        f.write(content)
+
+# Display directory tree
+for root, dirs, files in os.walk(project_root):
+    level = root.replace(project_root, '').count(os.sep)
+    indent = ' ' * 2 * level
+    print(f"{indent}{os.path.basename(root)}/")
+    for file in files:
+        print(f"{indent}  {file}")
+
+print("\nProject scaffold created at '/mnt/data/myonjo-portfolio'.\n")
+print("Next steps:")
+print("1. cd /mnt/data/myonjo-portfolio")
+print("2. npm install")
+print("3. npm run dev")
+
